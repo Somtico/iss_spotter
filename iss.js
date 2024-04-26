@@ -40,4 +40,39 @@ const fetchMyIP = (callback) => {
   });
 };
 
-module.exports = { fetchMyIP };
+const fetchCoordsByIP = (myIp, callback) => {
+  const url = `https://ipwho.is/${myIp}`;
+
+  request(url, (error, response, body) => {
+    if (error) {
+      callback(error, null);
+      return;
+    }
+
+    if (response.statusCode !== 200) {
+      const msg = console.log(
+        `Status code ${response.statusCode} when geolocation is fetched.`
+      );
+      callback(Error(msg), null);
+      return;
+    }
+
+    const data = JSON.parse(body);
+
+    // Check if the API request was successful
+    if (!data.success) {
+      const msg = console.log(`Success status was ${data.success}. Server message says: ${data.message} when fetching for IP ${myIp}`);
+      callback(new Error(msg), null);
+      return;
+    }
+
+    const geolocation = {
+      latitude: data.latitude,
+      longitude: data.longitude,
+    };
+
+    callback(null, geolocation);
+  });
+};
+
+module.exports = { fetchMyIP, fetchCoordsByIP };
