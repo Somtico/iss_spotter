@@ -98,7 +98,7 @@ const fetchISSFlyOverTimes = (callback) => {
       return;
     }
 
-    const url = `https://iss-flyover.herokuapp.com/json/?lat=${coords.latitude}&lon=${coords.longitude}&n=3`;
+    const url = `https://iss-flyover.herokuapp.com/json/?lat=${coords.latitude}&lon=${coords.longitude}&n`;
 
     request(url, (error, res, body) => {
       if (error) {
