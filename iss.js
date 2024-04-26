@@ -90,12 +90,10 @@ const fetchISSFlyOverTimes = (coords, callback) => {
 
     const data = JSON.parse(body);
 
-    const flyOverTimes = {
-      risetime1: data.response[0].risetime,
-      duration1: data.response[0].duration,
-      risetime2: data.response[1].risetime,
-      duration2: data.response[1].duration,
-    };
+    const flyOverTimes = data.response.map(pass => {
+      const response = { risetime: pass.risetime, duration: pass.duration};
+      return response;
+    });
 
     callback(null, flyOverTimes);
   });
