@@ -50,9 +50,7 @@ const fetchCoordsByIP = (myIp, callback) => {
     }
 
     if (response.statusCode !== 200) {
-      const msg = console.log(
-        `Status code ${response.statusCode} when geolocation is fetched.`
-      );
+      const msg = `Status code ${response.statusCode} when geolocation is fetched.`;
       callback(Error(msg), null);
       return;
     }
@@ -61,7 +59,7 @@ const fetchCoordsByIP = (myIp, callback) => {
 
     // Check if the API request was successful
     if (!data.success) {
-      const msg = console.log(`Success status was ${data.success}. Server message says: ${data.message} when fetching for IP ${myIp}`);
+      const msg = `Success status was ${data.success}. Server message says: ${data.message} when fetching for IP ${myIp}`;
       callback(new Error(msg), null);
       return;
     }
